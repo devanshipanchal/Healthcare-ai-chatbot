@@ -1,0 +1,11 @@
+version: "3.0"
+
+stories:
+- story: appointment booking with form
+  steps:
+  - intent: book_appointment
+  - action: appointment_form
+  - active_loop: appointment_form
+  - active_loop: null
+  - action: action_book_appointment
+

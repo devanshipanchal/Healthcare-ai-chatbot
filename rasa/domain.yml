@@ -1,0 +1,58 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - book_appointment
+  - provide_name
+  - provide_date
+
+entities:
+  - person_name
+  - appointment_date
+
+slots:
+  person_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: person_name
+
+  appointment_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: appointment_date
+
+  appointment_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+forms:
+  appointment_form:
+    required_slots:
+      - person_name
+      - appointment_date
+
+responses:
+  utter_greet:
+    - text: "Hello! I can help with appointments and basic info. How may I assist you?"
+
+  utter_goodbye:
+    - text: "Goodbye! Take care."
+
+  utter_ask_person_name:
+    - text: "Sure — what's the patient name?"
+
+  utter_ask_appointment_date:
+    - text: "Which date do you prefer? (YYYY-MM-DD)"
+
+  utter_confirm_booking:
+    - text: "Your appointment is booked. ID: {appointment_id}"
+
+actions:
+  - action_book_appointment

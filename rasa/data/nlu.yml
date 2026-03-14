@@ -1,0 +1,49 @@
+version: "3.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+    - hlo
+    - hello there
+    - hi bot
+
+- intent: goodbye
+  examples: |
+    - bye
+    - goodbye
+    - see you
+    - take care
+
+- intent: book_appointment
+  examples: |
+    - I want to book an appointment
+    - book appointment
+    - schedule an appointment
+    - I need to see a doctor
+    - book a doctor visit
+    - I want to schedule a visit
+    - appointment please
+
+- intent: provide_name
+  examples: |
+    - my name is [Devanshi](person_name)
+    - I am [Rahul](person_name)
+    - this is [Amit](person_name)
+    - [Neha](person_name)
+    - you can call me [Ravi](person_name)
+
+- intent: provide_date
+  examples: |
+    - [2026-02-15](appointment_date)
+    - [2026-03-01](appointment_date)
+    - [tomorrow](appointment_date)
+    - [next monday](appointment_date)
+    - [today](appointment_date)
+
+
+

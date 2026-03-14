@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  rasa:
+    image: rasa/rasa:3.6.0-full   # use a recent Rasa OSS image
+    command: ["run", "--enable-api", "--cors", "*"]
+    volumes:
+      - ./rasa:/app
+    ports:
+      - "5005:5005"
+    depends_on:
+      - action_server
+    environment:
+      - PYTHONPATH=/app
+  action_server:
+    build: ./rasa/actions
+    volumes:
+      - ./rasa/actions:/app
+    ports:
+      - "5055:5055"
+    environment:
+      - ACTION_ENDPOINT_URL=http://rasa:5055/webhook
+      - APPOINTMENT_SERVICE_URL=http://appointment_service:8000
+    depends_on:
+      - appointment_service
+  appointment_service:
+    build: ./appointment_service
+    ports:
+      - "8000:8000"
+    environment:
+      - SQLITE_PATH=/data/appointments.db
+    volumes:
+      - ./appointment_service/data:/data
+  frontend:
+    image: nginx:latest
+    ports:
+    - "8080:80"
+    volumes:
+    - ./frontend:/usr/share/nginx/html

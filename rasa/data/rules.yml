@@ -1,0 +1,21 @@
+version: "3.0"
+
+rules:
+- rule: Greet the user
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Start appointment form ONLY on intent
+  steps:
+  - intent: book_appointment
+  - action: appointment_form
+  - active_loop: appointment_form
+
+- rule: Submit appointment form
+  condition:
+  - active_loop: appointment_form
+  steps:
+  - action: appointment_form
+  - active_loop: null
+  - action: action_book_appointment
